@@ -9,9 +9,12 @@
   - Colors and sizes are hardcoded in the SourceDisc package
 
 
+
 - *Drawing and rendering is implemented in glyph classes implementing Glyph protocol*
 - *ControlPad.UIDelegate does not implement input methods (onPress(), ...)?*
   - *(Animations are triggered directly from ControlPad class?)*
+
+  
 
 
 
@@ -23,12 +26,23 @@
 
 
 ### History Architecture
-Methods to call on Back/Forward in RimPad:
+Who is going to add/remove sources:
+  - History
+  - AI helper?
+  - Copy/Paste functionality
+  - Interrim pad exchange functionality
 
-    rim.add(s: Source)
-    rim.remove(s: Source)
+TODO: Optimize memory leaks of object references in Event class
 
-Methods to call on getScene when acquiring glyphs
+### Classes to add:
 
-    scene.add(s: Source)
-    scene.remove(s: Source)
+DiscManager
+
+
+protocol DiscManagerDelegate {
+
+    func redraw()
+    func onNew(sourceDisc: SourceDisc)
+    func onHapticFeedback()
+
+  }
