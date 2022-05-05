@@ -14,7 +14,7 @@
 - *ControlPad.UIDelegate does not implement input methods (onPress(), ...)?*
   - *(Animations are triggered directly from ControlPad class?)*
 
-  
+
 
 
 
@@ -31,6 +31,9 @@ Who is going to add/remove sources:
   - AI helper?
   - Copy/Paste functionality
   - Interrim pad exchange functionality
+
+- Devise a way for the whole scene replacement to be saved as Event
+
 
 TODO: Optimize memory leaks of object references in Event class
 
