@@ -1,0 +1,34 @@
+## Re-factoring Architecture
+
+
+### Delegate Architecture
+
+#### Problems in the current architecture:
+  - Unused methods in UIDelegate - `onPress()`, etc., methods are never overriden in the delegates
+  - Mixed render and draw
+  - Colors and sizes are hardcoded in the SourceDisc package
+
+
+- *Drawing and rendering is implemented in glyph classes implementing Glyph protocol*
+- *ControlPad.UIDelegate does not implement input methods (onPress(), ...)?*
+  - *(Animations are triggered directly from ControlPad class?)*
+
+
+
+### Model Architecture
+- Scene class is extracted from the Device class
+- Sources are not sorted in the model class, instead they are regenerated in the right
+  order from the RimPad on every add/remove
+
+
+
+### History Architecture
+Methods to call on Back/Forward in RimPad:
+
+    rim.add(s: Source)
+    rim.remove(s: Source)
+
+Methods to call on getScene when acquiring glyphs
+
+    scene.add(s: Source)
+    scene.remove(s: Source)
