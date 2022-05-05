@@ -18,6 +18,8 @@
 
 
 
+
+
 ### Model Architecture
 - Scene class is extracted from the Device class
 - Sources are not sorted in the model class, instead they are regenerated in the right
