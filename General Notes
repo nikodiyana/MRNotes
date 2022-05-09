@@ -21,9 +21,12 @@
 
 
 ### Model Architecture
+- Should there be a link to the model from the SourceDisc class?
+
 - Scene class is extracted from the Device class
 - Sources are not sorted in the model class, instead they are regenerated in the right
   order from the RimPad on every add/remove
+- Detach serializer from Model?
 
 
 
