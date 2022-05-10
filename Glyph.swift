@@ -1,4 +1,7 @@
-protocol Glyph {
-  func render()
+protocol Drawable {
   func draw()
+}
+
+protocol Glyph: Drawable {
+  func render()
 }
