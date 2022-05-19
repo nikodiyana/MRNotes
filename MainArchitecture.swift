@@ -13,6 +13,8 @@ protocol InfoDisplay {
   func hide()
 }
 
+
+
 class ConsoleInfo: InfoDisplay {
   func showDimmer(value: Float, lastValue: Float) {
     let offset = value - lastValue
@@ -21,6 +23,8 @@ class ConsoleInfo: InfoDisplay {
 
   func hide() { }
 }
+
+
 
 class CALayerInfoPanel: InfoDisplay {
   func showDimmer(value: Float, lastValue: Float) {
@@ -38,24 +42,27 @@ protocol ComLink {
   func send(data: UInt8[])
 }
 
+
+
 class BTComLink {
   let com: Com!
   init(Com com) {
     self.com = com
   }
-
-
 }
+
 
 
 class Com {
   var link = BTLink() //BLELink, UDPLink, TCPLink
+
   func sync(SourcePad sourcePad) {
     //serialize
     link.send(data)
   }
+
   func onReceive(data[]) {
     //deserialize
-    //input to ControlUnit 
+    //input to ControlUnit
   }
 }

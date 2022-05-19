@@ -1,0 +1,81 @@
+// Pointer incoming functions should let the rest of the view know if they are consumed
+
+class Pointer {
+  // Mouse superclass
+  func onMove(x, y) -> Bool {
+    location = (x, y)
+    for unit in controlUnits {
+      if isInside(unit.discPad) {
+        hover(disc.isHit(by: self))
+        return true
+      }
+    }
+    return false
+  }
+
+  func hover(pad? ControlPad) {
+    // like checkHover()
+    // call delegate funcs
+  }
+
+
+  // BASE Pointer
+  func isInside(disc: DiscPad) -> Bool {
+    radius = distance(location, disc.center)
+    return radius < disc.radius
+  }
+
+  func onDown(x, y) -> Bool {
+    location = (x, y)
+
+    for unit in controlUnits {
+      let disc = unit.discPad
+
+      // Measure the distance to center
+
+      //radius = distance(location, disc.center)
+
+      if isInside(disc) {
+        /// Pointer is inside disc:
+
+        // 1. Get pointer angle
+        angle = acos(location.y-disc.center.y, location.x-disc.center.x)
+
+        // 2. Do the pointer reset routine
+        saveDownLocation()
+        // reset other params
+
+        // 3. Get hitted pad
+        pad = disc.isHit(by: self)?.onDown(with: self)
+
+        // Exit the loop
+        return true
+      }
+    }
+    return false
+  }
+
+  func onDrag(x, y) -> Bool {
+    if pad == nil { return false }
+
+    //...
+    return true
+  }
+
+  func onUp() -> Bool {
+    if pad == nil { return false }
+
+    pad?.onUp(with: self)
+    pad = nil
+    return true
+  }
+
+  func onCancel() -> Bool {
+    return onUp()
+  }
+
+  func onTap(count: Int) -> Bool {
+    pad = disc.
+  }
+
+}

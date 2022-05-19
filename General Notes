@@ -19,8 +19,12 @@
 
 Names:
 `SourcePad` calls methods to `SourcePadGlyph`, which calls its `GlyphDelegate` render() and draw() methods
-
+or
 `SourcePad` calls methods to `SourcePadGlyph`, which calls its `GlyphRenderer` render() and draw() methods
+or
+`SourcePad` calls methods to `SourcePadDelegate` class, which calls its `GlyphRenderer` protocol render() and draw() methods
+or
+`SourcePad` calls methods to `SourcePadVisual` class, which calls its `VisualRenderer` protocol render() and draw() methods
 
 
 ### Model Architecture
