@@ -1,4 +1,5 @@
 /// PACKAGE
+
 class SourcePad {
   let SourcePad.Visual: ControlPad.Visual
 
@@ -15,28 +16,28 @@ class SourcePad {
 
 class SourcePadVisual extends ControlPad.Visual {
   weak var sourcePad: SourcePad // Owner of this visual
+  let baseShape = SectorAngles()
   let renderer: VisualRenderer
+
   var startA: Angle
   var sizeA: Angle
 
   init() {
     hoverAni.onUpdate = {
       calcColors()
-      renderer.paint()
+      renderer.repaint() // /.redraw()
     }
 
     stateAnim.onUpdate = {
       startA = stateAnim.value
-      renderer.render()
-      Stage.redraw()
+      renderer.redraw()
     }
   }
 
   func onRotate(offset) {
     startA = sourcePad.angle.cc
     // Just redraw
-    //renderer.redraw()
-    Stage.redraw()
+    renderer.redraw()
   }
 
   func onSize(offset) {
@@ -44,14 +45,14 @@ class SourcePadVisual extends ControlPad.Visual {
     sizeA = sourcePad.angle.cw
     // Render and redraw
     renderer.render()
-    Stage.redraw()
+    renderer.redraw()
   }
 
   onHistoryState() {
     stateAnim.start(from: startA, to: sourcePad.angle.cc)
     // Render and redraw
     renderer.render()
-    Stage.redraw()
+    renderer.redraw()
   }
 }
 
@@ -60,8 +61,9 @@ class SourcePadVisual extends ControlPad.Visual {
 /// PLATFORM
 
 class SourcePadRenderer: VisualRenderer {
-  weak var context: NSContext
   weak var sourcePadVisual: SourcePadVisual
+  weak var view: NSView
+
   var path: NSPath
 
   func paint() {
@@ -69,14 +71,13 @@ class SourcePadRenderer: VisualRenderer {
     view.setNeedsRedraw(getRect(sourcePadVisual))
   }
 
-  // func redraw() {
-  //   view.needsRedraw = true
-  // }
+  func redraw() {
+    view.needsRedraw = true
+  }
 
   func render() {
     path.reset()
-    path.add(Arc(0, sourcePadVisual.sizeA))
-    redraw()
+    path.add(Arc(0, sourcePadVisual.baseShape))
   }
 
   func draw()
